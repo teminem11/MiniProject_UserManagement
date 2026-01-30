@@ -2,10 +2,7 @@ package service;
 
 import model.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserService {
     private Map<Long, User> map = new HashMap<>();
@@ -26,6 +23,25 @@ public class UserService {
         List<User> list = new ArrayList<>();
         list.addAll(map.values());
         return list;
+    }
+
+    public List<User> sortByAgeAsc(){
+        List <User> listAgeAsc = new ArrayList<>();
+        listAgeAsc.addAll(getAllUsers());
+        listAgeAsc.sort(Comparator.comparingInt(User::getAge));
+        return listAgeAsc;
+    }
+    public List<User> sortByAgeDesc(){
+        List<User> listAgeDesc = new ArrayList<>();
+        listAgeDesc.addAll(getAllUsers());
+        listAgeDesc.sort(Comparator.comparingInt(User::getAge).reversed());
+        return listAgeDesc;
+    }
+    public List<User> sortByName(){
+        List<User> listName = new ArrayList<>();
+        listName.addAll(getAllUsers());
+        listName.sort(Comparator.comparing(User::getName));
+        return listName;
     }
 
 }
